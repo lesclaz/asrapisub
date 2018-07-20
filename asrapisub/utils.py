@@ -48,12 +48,9 @@ class JSon(object):
 def build_url(operation, base_url, user_name, password, client_version, client, params=None):
     url_base = (base_url + operations_dict[operation] + "u=" + user_name + "&p=enc:" +
                 password + "&v=" + str(client_version) + "&c=" + client + "&f=jsonp")
-    if not params:
-        return url_base + "&callback=" + client
-    else:
-        for key in params.keys():
-            url_base += parameters_dict[key] + str(params[key])
-        return url_base + "&callback=" + client
+    for key in params.keys():
+        url_base += parameters_dict[key] + str(params[key])
+    return url_base + "&callback=%s" % client
 
 
 def convert_id(_id):

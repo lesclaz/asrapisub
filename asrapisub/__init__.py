@@ -42,7 +42,11 @@ operations_dict = {"ping": "/ping.view?",
 protocols_dict = {"HTTP": "http://",
                   "HTTPS": "https://"}
 
-parameters_dict = {"id": "&id=",
+parameters_dict = {"user": "u=",
+                   "password": "&p=enc:",
+                   "client_version": "&v=",
+                   "client": "&c=",
+                   "id": "&id=",
                    "type": "&type=",
                    "size": "&size=",
                    "genre": "&genre=",

@@ -48,6 +48,8 @@ class Api(object):
         return self.get_header(url)["version"]
 
     def generate_url(self, operation, params=None):
+        if params is None:
+            params = {}
         return build_url(operation, self.connection.server.url,
                          self.connection.user.user_name,
                          self.connection.user.password,
@@ -62,16 +64,16 @@ class Api(object):
     def get_license(self):
         url = self.generate_url("get_license")
         header = self.get_header(url)
-        license = header["license"]
+        __license = header["__license"]
         element = Element()
-        if license["valid"]:
+        if __license["valid"]:
             element.valid = True
         else:
             element.valid = False
-        if "email" in license:
-            element.email = license["email"]
-        if "trialExpires" in license:
-            element.trialExpires = license["trialExpires"]
+        if "email" in __license:
+            element.email = __license["email"]
+        if "trialExpires" in __license:
+            element.trialExpires = __license["trialExpires"]
         return element
 
     def get_music_folders(self):
@@ -216,11 +218,11 @@ class Api(object):
                 entry_list.append(Entry(entry))
         return entry_list
 
-    def get_starred(self, musicFolderId=None):
+    def get_starred(self, music_folder_id=None):
         element_list = []
         params = {}
-        if musicFolderId:
-            params["musicFolderId"] = musicFolderId
+        if music_folder_id:
+            params["musicFolderId"] = music_folder_id
         url = self.generate_url("get_starred", params=params)
         header = self.get_header(url)
         starred = header["starred"]
