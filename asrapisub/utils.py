@@ -53,10 +53,6 @@ def build_url(operation, base_url, user_name, password, client_version, client, 
     return url_base + "&callback=%s" % client
 
 
-def convert_id(_id):
-    return "&id=" + str(_id)
-
-
 def convert_to_time(secons):
     hours = secons // 3600
     minutes = secons % 3600
