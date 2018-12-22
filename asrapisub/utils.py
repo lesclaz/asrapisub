@@ -26,12 +26,13 @@ from .core.exceptions import ApiError
 
 class JSon(object):
 
-    def __init__(self, url):
+    def __init__(self, __object, url):
         self.url = url
+        self.object = __object
 
     def json_text(self):
         json_byte = urllib.request.urlopen(self.url).read()
-        return trate_json_text(json_byte.decode("utf_8"))
+        return trate_json_text(json_byte.decode("utf_8"), self.object.connection.client)
 
     @property
     def header(self):
@@ -65,10 +66,10 @@ def replace_spaces(text):
     return text.replace(" ", "%20")
 
 
-def trate_json_text(jtext):
+def trate_json_text(jtext, app_name):
     json_text_lines = jtext.splitlines()
-    json_text_lines[0] = "{"
-    json_text_lines[-1] = "}"
+    json_text_lines[0] = json_text_lines[0].replace("%s(" % app_name, "")
+    json_text_lines[-1] = json_text_lines[-1].replace(");", "")
     json_trate = ""
     for line in json_text_lines:
         json_trate += "%s\n" % line

@@ -56,15 +56,14 @@ class Api(object):
                          self.connection.client_version, self.connection.client,
                          params=params)
 
-    @staticmethod
-    def get_header(url):
-        request = JSon(url)
+    def get_header(self, url):
+        request = JSon(self, url)
         return request.header
 
     def get_license(self):
         url = self.generate_url("get_license")
         header = self.get_header(url)
-        __license = header["__license"]
+        __license = header["license"]
         element = Element()
         if __license["valid"]:
             element.valid = True
@@ -86,9 +85,9 @@ class Api(object):
             folders.append(Folder(folder))
         return folders
 
-    def get_indexes(self, _id=None):
+    def get_indexes(self, music_folder_id=None):
         indexes_list = []
-        url = self.generate_url("get_indexes", params={"id": _id})
+        url = self.generate_url("get_indexes", params={"musicFolderId": music_folder_id})
         header = self.get_header(url)
         indexes = header["indexes"]
         index = indexes["index"]

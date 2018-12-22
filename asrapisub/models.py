@@ -163,7 +163,11 @@ class Directory(object):
 
     @property
     def child(self):
-        return []
+        if "child" in self.__directory:
+            child = []
+            for element in self.__directory["child"]:
+                child.append(Child(element))
+            return child
 
 
 class Folder(object):
@@ -549,3 +553,69 @@ class Genre(object):
     def value(self):
         if "value" in self.__genre:
             return self.__genre["value"]
+
+
+class Child(object):
+
+    def __init__(self, child):
+        self.__child = child
+
+    @property
+    def album(self):
+        if "album" in self.__child:
+            return self.__child["album"]
+
+    @property
+    def artist(self):
+        if "artist" in self.__child:
+            return self.__child["artist"]
+
+    @property
+    def coverArt(self):
+        if "coverArt" in self.__child:
+            return self.__child["coverArt"]
+
+    @property
+    def created(self):
+        if "created" in self.__child:
+            return self.__child["created"]
+
+    @property
+    def genre(self):
+        if "genre" in self.__child:
+            return self.__child["genre"]
+
+    @property
+    def id(self):
+        if "id" in self.__child:
+            return self.__child["id"]
+
+    @property
+    def isDir(self):
+        if "isDir" in self.__child:
+            return self.__child["isDir"]
+
+    @property
+    def parent(self):
+        if "parent" in self.__child:
+            return self.__child["parent"]
+
+    @property
+    def playCount(self):
+        if "playCount" in self.__child:
+            return self.__child["playCount"]
+
+    @property
+    def title(self):
+        if "title" in self.__child:
+            return self.__child["title"]
+
+    @property
+    def year(self):
+        if "year" in self.__child:
+            return self.__child["year"]
+
+    @property
+    def suffix(self):
+        if "suffix" in self.__child:
+            return self.__child["suffix"]
