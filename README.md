@@ -5,12 +5,14 @@ Se puede usar desde cualquier aplicacion en python3 con mucha facilidad.
 
 ## Usando ASR-API-SUB
 
-        from asrapisub.rest import Api
+```python
+from asrapisub.rest import Api
 
-        api = Api("user", "password", "host","https=False", port=4040, client="APP_NAME", client_version="VERSION")
-        artists = api.get_artists()
-        for artist in artists:
-              print(artist.name)
+api = Api("user", "password", "host","https=False", port=4040, client="APP_NAME", client_version="VERSION")
+artists = api.get_artists()
+for artist in artists:
+  print(artist.name)
+```
 
 ## Funciones
 
